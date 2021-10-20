@@ -130,33 +130,68 @@ public class ReverseArrow extends AbstractQuest implements
 					return d;
 				}
 			});
-			// * * 0 * *
-			// * 1 2 3 *
-			// 4 5 6 7 8
 
 			// get the position of the topmost token
 			final int topX = tokens.get(0).getX();
 			final int topY = tokens.get(0).getY();
 
-			// check first row
-			for (int i = 1; i <= 3; i++) {
-				final Token token = tokens.get(i);
-				if (token.getX() != topX - 1 + i - 1
-						|| token.getY() != topY + 1) {
-					return false;
-				}
-			}
+			// and of the lowest token
+			final int bottomX = tokens.get(8).getX();
+			final int bottomY = tokens.get(8).getY();
 
-			// check second row
-			for (int i = 4; i <= 8; i++) {
-				final Token token = tokens.get(i);
-				if (token.getX() != topX - 2 + i - 4
-						|| token.getY() != topY + 2) {
-					return false;
-				}
-			}
+			if (bottomY - topY == 2){
+				// test for the first pattern
+				// * * 0 * *
+				// * 1 2 3 *
+				// 4 5 6 7 8
 
-			return true;
+				// check first row
+				for (int i = 1; i <= 3; i++) {
+					final Token token = tokens.get(i);
+					if (token.getX() != topX - 1 + i - 1
+							|| token.getY() != topY + 1) {
+						return false;
+					}
+				}
+
+				// check second row
+				for (int i = 4; i <= 8; i++) {
+					final Token token = tokens.get(i);
+					if (token.getX() != topX - 2 + i - 4
+							|| token.getY() != topY + 2) {
+						return false;
+					}
+				}
+
+				return true;
+
+			} else if (bottomY - topY == 3) {
+				// test for the second pattern
+				// * * 0 * *
+				// * 1 * 2 *
+				// 3 4 5 6 7
+				// * * 8 * *
+
+				// check top and bottom on the same X-axis
+				if (topX != bottomX) return false;
+				// check first row
+				if (tokens.get(1).getX() != topX - 1 || tokens.get(1).getY() != topY + 1)
+					return false;
+				if (tokens.get(2).getX() != topX + 1 || tokens.get(2).getY() != topY + 1)
+					return false;
+
+				// check second row
+				for (int i = 3; i <= 7; i++) {
+					final Token token = tokens.get(i);
+					if (token.getX() != topX - 2 + i - 3
+							|| token.getY() != topY + 2) {
+						return false;
+					}
+				}
+
+				return true;
+
+			} else return false;
 		}
 
 		/**
