@@ -96,18 +96,6 @@ public class ReverseArrowTest {
 	/**
 	 * Tests for validity of arrow shape
 	 */
-	// @Test
-	// public void testCorrectPattern1() {
-	// 	ReverseArrow arrowquest = new ReverseArrow();
-	// 	arrowquest.addToWorld();
-	// 	Player bob = PlayerTestHelper.createPlayer("bob");
-	// 	PlayerTestHelper.registerPlayer(bob, SingletonRepository.getRPWorld().getZone("int_ados_reverse_arrow"));
-
-	// 	arrowquest.start(bob);
-
-	// 	assertTrue(arrowquest.player.isQuestCompleted("reverse_arrow"));
-	// }
-
 	@Test
 	public void testWrongPattern(){
 		// 0 1 2 3 4
