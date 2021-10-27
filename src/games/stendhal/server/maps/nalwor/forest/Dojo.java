@@ -15,6 +15,7 @@ import java.awt.Point;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 import games.stendhal.common.Direction;
 import games.stendhal.common.MathHelper;
@@ -41,7 +42,6 @@ import games.stendhal.server.entity.npc.condition.TimePassedCondition;
 import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.events.SoundEvent;
 import games.stendhal.server.maps.nalwor.forest.TrainingArea.TrainerNPC;
-
 
 public class Dojo implements ZoneConfigurator {
 
@@ -78,14 +78,14 @@ public class Dojo implements ZoneConfigurator {
 	/** message when dojo is full */
 	private static final String FULL_MESSAGE = "The dojo is full. Come back later.";
 
-
 	@Override
 	public void configureZone(final StendhalRPZone zone, final Map<String, String> attributes) {
 		dojoZone = zone;
 
 		initNPC();
 
-		dojoArea = new TrainingArea(QUEST_SLOT, zone, 5, 52, 35, 20, samurai, new Point(22, 74), new Point(22, 72), Direction.DOWN);
+		dojoArea = new TrainingArea(QUEST_SLOT, zone, 5, 52, 35, 20, samurai, new Point(22, 74), new Point(22, 72),
+				Direction.DOWN);
 		dojoArea.setCapacity(16);
 
 		// initialize condition to check if dojo is full
@@ -116,20 +116,9 @@ public class Dojo implements ZoneConfigurator {
 		samurai.addGoodbye();
 		samurai.addJob("I manage this dojo. Ask me if you would like to #train.");
 		samurai.addOffer("I can offer you a #training session for a #fee.");
-		samurai.addQuest("I don't need any help, but I can let you to #train for a #fee if you have been approved by the assassins' HQ.");
+		samurai.addQuest(
+				"I don't need any help, but I can let you to #train for a #fee if you have been approved by the assassins' HQ.");
 		samurai.addHelp("This is the assassins' dojo. I can let you #train here for a #fee if you're in good with HQ.");
-
-		samurai.add(ConversationStates.ATTENDING,
-				FEE_PHRASES,
-				null,
-				ConversationStates.ATTENDING,
-				null,
-				new ChatAction() {
-					@Override
-					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-						samurai.say("The fee to #train for your skill level is " + dojoArea.calculateFee(player.getAtk()) + " money.");
-					}
-				});
 
 		final ChatCondition meetsLevelCapCondition = new ChatCondition() {
 			@Override
@@ -156,122 +145,94 @@ public class Dojo implements ZoneConfigurator {
 			}
 		};
 
+		// only tell the player about the fee if they are weak enough to train
+		samurai.add(ConversationStates.ATTENDING, FEE_PHRASES, new NotCondition(meetsLevelCapCondition),
+				ConversationStates.ATTENDING, null, new ChatAction() {
+					@Override
+					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+						samurai.say("The fee to #train for your skill level is "
+								+ dojoArea.calculateFee(player.getAtk()) + " money.");
+					}
+				});
 
 		// player has never trained before
-		samurai.add(ConversationStates.ATTENDING,
-				TRAIN_PHRASES,
-				new AndCondition(
-						new QuestNotStartedCondition(QUEST_SLOT),
-						new NotCondition(meetsLevelCapCondition),
-						new PlayerHasItemWithHimCondition("assassins id"),
-						new NotCondition(dojoFullCondition)),
-				ConversationStates.QUESTION_1,
-				null,
-				new MultipleActions(
-						new NPCEmoteAction(samuraiName + " looks over your assassins id.", false),
-						new ChatAction() {
+		samurai.add(ConversationStates.ATTENDING, TRAIN_PHRASES,
+				new AndCondition(new QuestNotStartedCondition(QUEST_SLOT), new NotCondition(meetsLevelCapCondition),
+						new PlayerHasItemWithHimCondition("assassins id"), new NotCondition(dojoFullCondition)),
+				ConversationStates.QUESTION_1, null, new MultipleActions(
+						new NPCEmoteAction(samuraiName + " looks over your assassins id.", false), new ChatAction() {
 							@Override
 							public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-								samurai.say("Hmmm, I haven't seen you around here before. But you have the proper credentials. Do you want me to"
-										+ " open up the dojo? The fee is " + dojoArea.calculateFee(player.getAtk()) + " money.");
+								samurai.say(
+										"Hmmm, I haven't seen you around here before. But you have the proper credentials. Do you want me to"
+												+ " open up the dojo? The fee is "
+												+ dojoArea.calculateFee(player.getAtk()) + " money.");
 							}
 						}));
 
 		// player returns after cooldown period is up
-		samurai.add(ConversationStates.ATTENDING,
-				TRAIN_PHRASES,
-				new AndCondition(
-						new QuestInStateCondition(QUEST_SLOT, 0, STATE_DONE),
-						new TimePassedCondition(QUEST_SLOT, 1, COOLDOWN),
-						new NotCondition(meetsLevelCapCondition),
+		samurai.add(ConversationStates.ATTENDING, TRAIN_PHRASES, new AndCondition(
+				new QuestInStateCondition(QUEST_SLOT, 0, STATE_DONE), new TimePassedCondition(QUEST_SLOT, 1, COOLDOWN),
+				new NotCondition(meetsLevelCapCondition),
 						new PlayerHasItemWithHimCondition("assassins id")),
-				ConversationStates.QUESTION_1,
-				null,
-				new ChatAction() {
+				ConversationStates.QUESTION_1, null, new ChatAction() {
 					@Override
 					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-						samurai.say("At your skill level, it's " + dojoArea.calculateFee(player.getAtk()) + " money to train in the dojo. Would you like to enter?");
+						samurai.say("At your skill level, it's " + dojoArea.calculateFee(player.getAtk())
+								+ " money to train in the dojo. Would you like to enter?");
 					}
 				});
 
 		// player returns before cooldown period is up
-		samurai.add(ConversationStates.ATTENDING,
-				TRAIN_PHRASES,
-				new AndCondition(
-						new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, COOLDOWN)),
+		samurai.add(ConversationStates.ATTENDING, TRAIN_PHRASES, new AndCondition(
+				new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, COOLDOWN)),
 						new NotCondition(meetsLevelCapCondition)),
-				ConversationStates.ATTENDING,
-				null,
+				ConversationStates.ATTENDING, null,
 				new SayTimeRemainingAction(QUEST_SLOT, 1, COOLDOWN, "You can't train again yet. Come back in"));
 
 		// player's ATK level is too high
-		samurai.add(ConversationStates.ATTENDING,
-				TRAIN_PHRASES,
-				meetsLevelCapCondition,
-				ConversationStates.ATTENDING,
-				"At your level of experience, your attack strength is too high to train here at this time.",
-				null);
+		List<String> JOINED_PHRASES = new ArrayList<String>(TRAIN_PHRASES);
+		JOINED_PHRASES.addAll(FEE_PHRASES);
+		samurai.add(ConversationStates.ATTENDING, JOINED_PHRASES, meetsLevelCapCondition, ConversationStates.ATTENDING,
+				"At your level of experience, your attack strength is too high to train here at this time.", null);
 
 		// player does not have an assassins id
-		samurai.add(ConversationStates.ATTENDING,
-				TRAIN_PHRASES,
-				new AndCondition(
-						new NotCondition(meetsLevelCapCondition),
+		samurai.add(ConversationStates.ATTENDING, TRAIN_PHRASES, new AndCondition(
+				new NotCondition(meetsLevelCapCondition),
 						new NotCondition(new PlayerHasItemWithHimCondition("assassins id"))),
-				ConversationStates.ATTENDING,
-				"You can't train here without permission from the assassins' HQ.",
-				null);
+				ConversationStates.ATTENDING, "You can't train here without permission from the assassins' HQ.", null);
 
 		// player training state is active
-		samurai.add(ConversationStates.ATTENDING,
-				TRAIN_PHRASES,
-				new QuestInStateCondition(QUEST_SLOT, 0, STATE_ACTIVE),
-				ConversationStates.ATTENDING,
-				"Your current training session has not ended.",
-				null);
+		samurai.add(ConversationStates.ATTENDING, TRAIN_PHRASES, new QuestInStateCondition(QUEST_SLOT, 0, STATE_ACTIVE),
+				ConversationStates.ATTENDING, "Your current training session has not ended.", null);
 
 		// player meets requirements but training area is full
-		samurai.add(ConversationStates.ATTENDING,
-				TRAIN_PHRASES,
-				new AndCondition(
-						new NotCondition(meetsLevelCapCondition),
+		samurai.add(ConversationStates.ATTENDING, TRAIN_PHRASES, new AndCondition(
+				new NotCondition(meetsLevelCapCondition),
 						new PlayerHasItemWithHimCondition("assassins id"),
-						new NotCondition(new QuestInStateCondition(QUEST_SLOT, 0, STATE_ACTIVE)),
-						dojoFullCondition),
-				ConversationStates.ATTENDING,
-				FULL_MESSAGE,
-				null);
+						new NotCondition(new QuestInStateCondition(QUEST_SLOT, 0, STATE_ACTIVE)), dojoFullCondition),
+				ConversationStates.ATTENDING, FULL_MESSAGE, null);
 
-		/* player has enough money to begin training
+		/*
+		 * player has enough money to begin training
 		 *
-		 * XXX: If admin alters player's quest slot, timer/notifier is not removed. Which
-		 *      could potentially lead to strange behavior. But this should likely never
-		 *      happen on live server. In an attempt to prevent such issues, the old
-		 *      timer/notifier will be removed if the player begins a new training session.
-		 *      Else the timer will simply be removed once it has run its lifespan.
+		 * XXX: If admin alters player's quest slot, timer/notifier is not removed.
+		 * Which could potentially lead to strange behavior. But this should likely
+		 * never happen on live server. In an attempt to prevent such issues, the old
+		 * timer/notifier will be removed if the player begins a new training session.
+		 * Else the timer will simply be removed once it has run its lifespan.
 		 */
-		samurai.add(ConversationStates.QUESTION_1,
-				ConversationPhrases.YES_MESSAGES,
-				canAffordFeeCondition,
-				ConversationStates.IDLE,
-				null,
-				startTrainingAction);
+		samurai.add(ConversationStates.QUESTION_1, ConversationPhrases.YES_MESSAGES, canAffordFeeCondition,
+				ConversationStates.IDLE, null, startTrainingAction);
 
 		// player does not have enough money to begin training
-		samurai.add(ConversationStates.QUESTION_1,
-				ConversationPhrases.YES_MESSAGES,
-				new NotCondition(canAffordFeeCondition),
-				ConversationStates.ATTENDING,
-				"You don't even have enough money for the #fee.",
-				null);
+		samurai.add(ConversationStates.QUESTION_1, ConversationPhrases.YES_MESSAGES,
+				new NotCondition(canAffordFeeCondition), ConversationStates.ATTENDING,
+				"You don't even have enough money for the #fee.", null);
 
 		// player does not want to train
-		samurai.add(ConversationStates.QUESTION_1,
-				ConversationPhrases.NO_MESSAGES,
-				null,
-				ConversationStates.ATTENDING,
-				"Good luck then.",
-				null);
+		samurai.add(ConversationStates.QUESTION_1, ConversationPhrases.NO_MESSAGES, null, ConversationStates.ATTENDING,
+				"Good luck then.", null);
 	}
 
 	/**
