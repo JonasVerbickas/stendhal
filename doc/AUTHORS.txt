@@ -201,3 +201,17 @@ Notable contributors:
 - SnowFlake
   · Maps maker
   · NPCs
+- Jonas Verbickas
+  · Bugs fixer
+- Tudor Bujdei-Leonte
+  · Bugs fixer
+- Dillan Patel
+  · Bugs fixer
+- Eduard Sarkisyan
+  · Bugs fixer
+- Andrej Velichkovski
+  · Bugs fixer
+- Muhammad Ahmad
+  · Bugs fixer
+- Mihai-Catalin Tenea
+  · Bugs fixer

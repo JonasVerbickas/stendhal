@@ -2,6 +2,16 @@ Changelog
 ---------
 ---------
 
+1.37
+*fixes*
+- fixed "Omura Sumitada's dialogue" bug #1
+- fixed "Gamblos does not like my arrow" bug #2
+- fixed "The bestiary item is just full of fluff" bug #3
+- fixed "Teleport scrolls work when poisoned" bug #4
+- fixed "Zynn Iwuhos dialogue does not grant XP" bug #6
+- fixed "NPC Lupos doesn't want an elvish hat for quest" bug #7
+- fixed "Solar and glacier centaur have the wrong elemental susceptibility" bug #8
+
 1.36
 *world*
 - building Mine Town Revival Weeks as group quest
