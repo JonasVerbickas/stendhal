@@ -31,6 +31,7 @@ import games.stendhal.server.entity.creature.Creature;
 import games.stendhal.server.entity.creature.PurpleDragon;
 import games.stendhal.server.entity.creature.RaidCreature;
 import games.stendhal.server.entity.creature.Sheep;
+import games.stendhal.server.entity.creature.StealingPet;
 import games.stendhal.server.entity.item.StackableItem;
 import games.stendhal.server.entity.mapstuff.block.Block;
 import games.stendhal.server.entity.mapstuff.portal.Gate;
@@ -102,6 +103,13 @@ public class SummonAction extends AdministrationAction {
 				} else {
 					final Sheep sheep = new Sheep(player);
 					found(type, sheep);
+				}
+			} else if ("stealing pet".equals(type)) {
+				if (player.hasPet()) {
+					error("You already own a pet!");
+				} else {
+					final StealingPet stealingPet = new StealingPet(player);
+					found(type, stealingPet);
 				}
 			}
 		}
