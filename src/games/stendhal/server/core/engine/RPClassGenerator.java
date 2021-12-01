@@ -24,6 +24,7 @@ import games.stendhal.server.entity.creature.Creature;
 import games.stendhal.server.entity.creature.Pet;
 import games.stendhal.server.entity.creature.PurpleDragon;
 import games.stendhal.server.entity.creature.Sheep;
+import games.stendhal.server.entity.creature.StealingPet;
 import games.stendhal.server.entity.item.Corpse;
 import games.stendhal.server.entity.item.Item;
 import games.stendhal.server.entity.item.ItemInformation;
@@ -227,6 +228,9 @@ public class RPClassGenerator {
 		}
 		if (!RPClass.hasRPClass("cat")) {
 			Cat.generateRPClass();
+		}
+		if (!RPClass.hasRPClass("stealing_pet")) {
+			StealingPet.generateRPClass();
 		}
 		if (!RPClass.hasRPClass("baby_dragon")) {
 			BabyDragon.generateRPClass();
