@@ -25,7 +25,6 @@ import games.stendhal.server.entity.creature.BabyDragon;
 import games.stendhal.server.entity.creature.Cat;
 import games.stendhal.server.entity.creature.Pet;
 import games.stendhal.server.entity.creature.PurpleDragon;
-import games.stendhal.server.entity.creature.StealingPet;
 //import games.stendhal.server.entity.creature.Sheep;
 //import games.stendhal.server.core.engine.transformer.PlayerTransformer;
 import games.stendhal.server.entity.item.Item;
@@ -113,9 +112,6 @@ public class SummonPetScroll extends Scroll {
 			break;
 		case "purple dragon":
 			pet = new PurpleDragon(player);
-			break;
-		case "stealing pet":
-			pet = new StealingPet(player);
 			break;
 		default:
 			// Didn't match a known pet type
