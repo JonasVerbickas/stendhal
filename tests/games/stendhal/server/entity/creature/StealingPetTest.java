@@ -5,17 +5,15 @@ import org.junit.Test;
 import org.junit.BeforeClass;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
 
+import games.stendhal.server.core.engine.StendhalRPZone;
+import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.maps.MockStendlRPWorld;
-import marauroa.common.Log4J;
-import marauroa.common.game.RPAction;
-import utilities.RPClass.BabyDragonTestHelper;
+import utilities.PlayerTestHelper;
 
 // Not much to be tested, these will have to do
 public class StealingPetTest {
@@ -32,18 +30,11 @@ public class StealingPetTest {
 	 */
 	@Test
 	public void testStealingPetDiet() {
-		final StealingPet pet = new StealingPet();
+		final StendhalRPZone zone = new StendhalRPZone("zone");
+		final Player bob = PlayerTestHelper.createPlayer("bob");
+		zone.add(bob);
+		final StealingPet pet = new StealingPet(bob);
 		assertThat(pet.getFoodNames(), is(foods));
-	}
-	
-	/**
-	 * Tests for stealingPetSpeed. We want it to be nimble.
-	 */
-	@Test
-	public void testStealingPetSpeed()
-	{
-		final StealingPet pet = new StealingPet();
-		assertEquals(pet.getDouble("base_speed"), 2, 0);
 	}
 	
 }
