@@ -83,6 +83,7 @@ public class StendhalQuestSystem {
 		// deactivated capture the flag
 		//loadQuest(new CaptureFlagQuest());
 		loadQuest(new ChocolateForElisabeth());
+		loadQuest(new StealingPetQuest());
 		loadQuest(new CleanAthorsUnderground());
 		loadQuest(new CleanStorageSpace());
 		loadQuest(new CloakCollector());
