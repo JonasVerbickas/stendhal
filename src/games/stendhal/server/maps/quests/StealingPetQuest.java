@@ -13,10 +13,32 @@
 package games.stendhal.server.maps.quests;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
+import games.stendhal.common.Rand;
+import games.stendhal.common.parser.Sentence;
+import games.stendhal.server.core.engine.SingletonRepository;
+import games.stendhal.server.entity.item.StackableItem;
+import games.stendhal.server.entity.npc.ChatAction;
+import games.stendhal.server.entity.npc.ConversationPhrases;
+import games.stendhal.server.entity.npc.ConversationStates;
+import games.stendhal.server.entity.npc.EventRaiser;
+import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.entity.npc.action.DropItemAction;
+import games.stendhal.server.entity.npc.action.IncreaseKarmaAction;
+import games.stendhal.server.entity.npc.action.IncreaseXPAction;
+import games.stendhal.server.entity.npc.action.MultipleActions;
+import games.stendhal.server.entity.npc.action.SetQuestAction;
+import games.stendhal.server.entity.npc.condition.AndCondition;
+import games.stendhal.server.entity.npc.condition.PlayerHasItemWithHimCondition;
+import games.stendhal.server.entity.npc.condition.QuestInStateCondition;
+import games.stendhal.server.entity.npc.condition.QuestNotStartedCondition;
 import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.maps.Region;
+
+import games.stendhal.server.entity.creature.StealingPet;
 
 public class StealingPetQuest extends AbstractQuest {
 
@@ -29,12 +51,89 @@ public class StealingPetQuest extends AbstractQuest {
 		return QUEST_SLOT;
 	}
 
+	private void firstStep() {
+		final SpeakerNPC npc = npcs.get(NPC_NAME);
+
+		final List<ChatAction> reward = new LinkedList<ChatAction>();
+		reward.add(new DropItemAction("sapphire"));
+		reward.add(new ChatAction() {
+			@Override
+			public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+				// pick a random flower
+				String rewardClass = Rand.rand(Arrays.asList("daisies", "zantedeschia", "pansy"));
+
+				final StackableItem item = (StackableItem) SingletonRepository.getEntityManager().getItem(rewardClass);
+				item.setQuantity(1);
+				player.equipOrPutOnGround(item);
+				StealingPet stealing_pet = new StealingPet(player);
+				stealing_pet.setPosition(player.getX(), player.getY() + 1);
+				player.notifyWorldAboutChanges();
+			}
+		});
+		reward.add(new IncreaseXPAction(500));
+		reward.add(new SetQuestAction(QUEST_SLOT, "done"));
+		reward.add(new IncreaseKarmaAction(10.0));
+
+		npc.add(ConversationStates.IDLE,
+				ConversationPhrases.GREETING_MESSAGES,
+				new QuestNotStartedCondition(QUEST_SLOT),
+				ConversationStates.ATTENDING,
+				"A mysterious animal has stolen all my jewellery. If you manage to find a sapphire we could lure him out.",
+				new SetQuestAction(QUEST_SLOT, "start"));
+
+		npc.add(ConversationStates.ATTENDING,
+				ConversationPhrases.YES_MESSAGES,
+				new AndCondition(new PlayerHasItemWithHimCondition("sapphire"),
+						new QuestInStateCondition(QUEST_SLOT, "start")),
+				ConversationStates.IDLE,
+				"HOW DID YOU TAME IT?!? Have some flowers for your trouble.",
+				new MultipleActions(reward));
+
+		npc.add(ConversationStates.ATTENDING,
+				ConversationPhrases.FINISH_MESSAGES,
+				new AndCondition(new PlayerHasItemWithHimCondition("sapphire"),
+						new QuestInStateCondition(QUEST_SLOT, "start")),
+				ConversationStates.IDLE,
+				"HOW DID YOU TAME IT?!? Have some flowers for your trouble.",
+				new MultipleActions(reward));
+
+		npc.add(ConversationStates.ATTENDING,
+				ConversationPhrases.NO_MESSAGES,
+				new QuestInStateCondition(QUEST_SLOT,
+						"start"),
+				ConversationStates.IDLE,
+				"Well, come back when you do. I'll be waiting for you.",
+				null);
+
+		npc.add(ConversationStates.ATTENDING,
+				ConversationPhrases.GOODBYE_MESSAGES,
+				new QuestInStateCondition(QUEST_SLOT, "start"),
+				ConversationStates.IDLE,
+				"Well, come back when you do. I'll be waiting for you.",
+				null);
+
+		npc.add(ConversationStates.IDLE,
+				ConversationPhrases.GREETING_MESSAGES,
+				new QuestInStateCondition(QUEST_SLOT, "start"),
+				ConversationStates.ATTENDING,
+				"Have you found a sapphire?",
+				null);
+
+		npc.add(ConversationStates.IDLE,
+				ConversationPhrases.GREETING_MESSAGES,
+				new QuestInStateCondition(QUEST_SLOT, "done"),
+				ConversationStates.IDLE,
+				"How's your new pet holding up?",
+				null);
+	}
+
 	@Override
 	public void addToWorld() {
 		fillQuestInfo(
 				"Stealing pet thingy",
 				"Give sapphire to NPC for a reward",
 				true);
+		firstStep();
 	}
 
 	@Override
@@ -74,4 +173,3 @@ public class StealingPetQuest extends AbstractQuest {
 		return NPC_NAME;
 	}
 }
-
