@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.core.engine;
 
+import java.util.ArrayList;
+
 import games.stendhal.server.core.events.LoginNotifier;
 import games.stendhal.server.core.events.LogoutNotifier;
 import games.stendhal.server.core.events.TurnNotifier;
@@ -51,6 +53,9 @@ public class SingletonRepository {
 	private static Jail jailInstance;
 	private static GroupManager groupManager;
 	private static PlayerVsPlayerChallengeManager challengeManager;
+	
+	public static ArrayList<String> allAchievements = new ArrayList<String>();
+	public static ArrayList<String> allAchievedBy = new ArrayList<String>();
 
 	/**
 	 * @return the actual StendhalRPRuleProcessor instance
