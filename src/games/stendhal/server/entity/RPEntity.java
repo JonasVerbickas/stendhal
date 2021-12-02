@@ -63,6 +63,7 @@ import games.stendhal.server.entity.npc.TrainingDummy;
 import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.entity.slot.EntitySlot;
 import games.stendhal.server.entity.slot.Slots;
+import games.stendhal.server.entity.status.SleepStatus;
 import games.stendhal.server.entity.status.Status;
 import games.stendhal.server.entity.status.StatusAttacker;
 import games.stendhal.server.entity.status.StatusList;
@@ -1481,8 +1482,15 @@ System.out.printf("  drop: %2d %2d\n", attackerRoll, defenderRoll);
 					.getTurn();
 			enemiesThatGiveFightXP.put((RPEntity) attacker, currentTurn);
 		}
-
-		final int leftHP = getHP() - damage;
+		
+		int damageFactor = 1;
+		if(hasStatus(StatusType.SLEEPING)) {
+			damageFactor = 2;
+			this.sendPrivateText("You were attacked while sleeping");
+			getStatusList().removeAll(SleepStatus.class);
+		}
+		
+		final int leftHP = getHP() - damage * damageFactor;
 
 		totalDamageReceived += damage;
 

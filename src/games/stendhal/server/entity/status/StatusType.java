@@ -44,6 +44,7 @@ public enum StatusType {
 	HEAVY(new HeavyStatusHandler()),
 	
 	SLEEPING(new SleepStatusHandler());
+	
 	/** the status handler for this StatusType */
 	private final StatusHandler<? extends Status> statusHandler;
 

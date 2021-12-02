@@ -56,13 +56,16 @@ public class PoisonStatusTurnListener implements TurnListener {
 		List<ConsumableStatus> toRemove = new LinkedList<ConsumableStatus>();
 		int sum = 0;
 		int amount = 0;
+		
+		// If sleeping, reduce damage taken
+		double reduceFactor = entity.hasStatus(StatusType.SLEEPING) ? 0.75 : 1;
 		for (final PoisonStatus poison : toConsume) {
 			if (turn % poison.getFrecuency() == 0) {
 				if (poison.consumed()) {
 					toRemove.add(poison);
 				} else {
 					amount = poison.consume();
-					entity.damage(-amount, poison);
+					entity.damage((int)(-amount * reduceFactor), poison);
 					sum += amount;
 					entity.put(ATTRIBUTE_NAME, sum);
 				}

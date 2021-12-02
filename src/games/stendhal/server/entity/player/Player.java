@@ -69,6 +69,7 @@ import games.stendhal.server.entity.item.Item;
 import games.stendhal.server.entity.item.RingOfLife;
 import games.stendhal.server.entity.npc.behaviour.impl.OutfitChangerBehaviour.ExpireOutfit;
 import games.stendhal.server.entity.slot.Slots;
+import games.stendhal.server.entity.status.SleepStatus;
 import games.stendhal.server.entity.status.StatusType;
 import games.stendhal.server.events.PrivateTextEvent;
 import games.stendhal.server.events.SoundEvent;
@@ -331,7 +332,11 @@ public class Player extends DressedEntity implements UseListener {
 		size = directions.size();
 		if (size != 0) {
 			direction = directions.get(size - 1);
-
+			
+			if(hasStatus(StatusType.SLEEPING)) {
+				getStatusList().removeAll(SleepStatus.class);
+			}
+			
 			// as an effect of the poisoning, the player's controls
 			// are switched to make it difficult to navigate.
 			if (hasStatus(StatusType.POISONED) || has("status_confuse")) {
