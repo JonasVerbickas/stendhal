@@ -3,7 +3,6 @@ package games.stendhal.server.maps.quests;
 import static org.junit.Assert.assertEquals;
 import static utilities.SpeakerNPCTestHelper.getReply;
 
-import org.junit.After; // remove
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -43,16 +42,14 @@ public class DailyPostTest {
         final AbstractQuest quest = new DailyPost();
         quest.addToWorld();
     }
-    
-    @After
-    public void tearDown() { // not to be committed. This will be a suggested improvement during the code review.
-    	SingletonRepository.getNPCList().clear();
-    	SingletonRepository.allAchievements.clear();
-    	SingletonRepository.allAchievedBy.clear();
-    }
 
     @Test
     public void testNoAchievements() {
+    	// reset lists for SingletonRepository
+    	SingletonRepository.getNPCList().clear();
+    	SingletonRepository.allAchievements.clear();
+    	SingletonRepository.allAchievedBy.clear();
+    	
         // leave achievement list empty
 
         // check that npc sees no achievements
@@ -69,6 +66,11 @@ public class DailyPostTest {
 
     @Test
     public void testMainAchievement() {
+    	// reset lists for SingletonRepository
+    	SingletonRepository.getNPCList().clear();
+    	SingletonRepository.allAchievements.clear();
+    	SingletonRepository.allAchievedBy.clear();
+    	
         // add one achievement
         SingletonRepository.allAchievements.add("achievement 1");
         SingletonRepository.allAchievedBy.add("player 1");
@@ -87,6 +89,11 @@ public class DailyPostTest {
 
     @Test
     public void testSecondaryAchievement() {
+    	// reset lists for SingletonRepository
+    	SingletonRepository.getNPCList().clear();
+    	SingletonRepository.allAchievements.clear();
+    	SingletonRepository.allAchievedBy.clear();
+    	
         // add two achievements
         SingletonRepository.allAchievements.add("achievement 1");
         SingletonRepository.allAchievedBy.add("player 1");
