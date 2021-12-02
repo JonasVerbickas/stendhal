@@ -55,7 +55,7 @@ public class StealingPet extends Pet {
 	}
 
 	/**
-	 * Creates a new wild Cat.
+	 * Creates a new wild stealing pet.
 	 */
 	public StealingPet() {
 		this(null);
@@ -84,12 +84,12 @@ public class StealingPet extends Pet {
 	}
 
 	/**
-	 * Creates a StealingPet based on an existing monkey RPObject, and assigns it to a
+	 * Creates a StealingPet based on an existing stealing_pet RPObject, and assigns it to a
 	 * player.
 	 *
-	 * @param object object containing the data for the Cat
+	 * @param object object containing the data for the StealingPet
 	 * @param owner
-	 *            The player who should own the cat
+	 *            The player who should own the stealing pet
 	 */
 	public StealingPet(final RPObject object, final Player owner) {
 		super(object, owner);
