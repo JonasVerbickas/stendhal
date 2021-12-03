@@ -14,7 +14,6 @@ import games.stendhal.server.entity.npc.SpeakerNPC;
 import games.stendhal.server.entity.npc.fsm.Engine;
 import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.maps.semos.city.DailyPostNPC;
-import games.stendhal.server.maps.quests.DailyPost;
 import utilities.PlayerTestHelper;
 import utilities.QuestHelper;
 
@@ -41,15 +40,15 @@ public class DailyPostTest {
         // set up quest
         final AbstractQuest quest = new DailyPost();
         quest.addToWorld();
+        
+        // reset lists for SingletonRepository
+    	SingletonRepository.getNPCList().clear();
+    	SingletonRepository.allAchievements.clear();
+    	SingletonRepository.allAchievedBy.clear();
     }
 
     @Test
     public void testNoAchievements() {
-    	// reset lists for SingletonRepository
-    	SingletonRepository.getNPCList().clear();
-    	SingletonRepository.allAchievements.clear();
-    	SingletonRepository.allAchievedBy.clear();
-    	
         // leave achievement list empty
 
         // check that npc sees no achievements
@@ -66,11 +65,6 @@ public class DailyPostTest {
 
     @Test
     public void testMainAchievement() {
-    	// reset lists for SingletonRepository
-    	SingletonRepository.getNPCList().clear();
-    	SingletonRepository.allAchievements.clear();
-    	SingletonRepository.allAchievedBy.clear();
-    	
         // add one achievement
         SingletonRepository.allAchievements.add("achievement 1");
         SingletonRepository.allAchievedBy.add("player 1");
@@ -89,11 +83,6 @@ public class DailyPostTest {
 
     @Test
     public void testSecondaryAchievement() {
-    	// reset lists for SingletonRepository
-    	SingletonRepository.getNPCList().clear();
-    	SingletonRepository.allAchievements.clear();
-    	SingletonRepository.allAchievedBy.clear();
-    	
         // add two achievements
         SingletonRepository.allAchievements.add("achievement 1");
         SingletonRepository.allAchievedBy.add("player 1");
