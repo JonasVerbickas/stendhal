@@ -1,0 +1,763 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch TimezoneDump",
+            "request": "launch",
+            "mainClass": "com.mysql.cj.jdbc.admin.TimezoneDump",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch CreatureAnimationPreview",
+            "request": "launch",
+            "mainClass": "data.sprites.monsters.CreatureAnimationPreview",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch CursesClient",
+            "request": "launch",
+            "mainClass": "games.stendhal.bot.curses.CursesClient",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch ShouterMain",
+            "request": "launch",
+            "mainClass": "games.stendhal.bot.shouter.ShouterMain",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Answer",
+            "request": "launch",
+            "mainClass": "games.stendhal.bot.support.Answer",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Ask",
+            "request": "launch",
+            "mainClass": "games.stendhal.bot.support.Ask",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch TextClient",
+            "request": "launch",
+            "mainClass": "games.stendhal.bot.textclient.TextClient",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch TransitionDiagram",
+            "request": "launch",
+            "mainClass": "games.stendhal.client.gui.admin.TransitionDiagram",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch CreateAccountDialog",
+            "request": "launch",
+            "mainClass": "games.stendhal.client.gui.login.CreateAccountDialog",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch ProfileList",
+            "request": "launch",
+            "mainClass": "games.stendhal.client.gui.login.ProfileList",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch DeviceEvaluator",
+            "request": "launch",
+            "mainClass": "games.stendhal.client.sound.manager.DeviceEvaluator",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch stendhal",
+            "request": "launch",
+            "mainClass": "games.stendhal.client.stendhal",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch textClient",
+            "request": "launch",
+            "mainClass": "games.stendhal.client.textClient",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Starter",
+            "request": "launch",
+            "mainClass": "games.stendhal.client.update.Starter",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch UpdateProgressBar",
+            "request": "launch",
+            "mainClass": "games.stendhal.client.update.UpdateProgressBar",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Level",
+            "request": "launch",
+            "mainClass": "games.stendhal.common.Level",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch StendhalServer",
+            "request": "launch",
+            "mainClass": "games.stendhal.server.StendhalServer",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch ZonesXMLLoader",
+            "request": "launch",
+            "mainClass": "games.stendhal.server.core.config.ZonesXMLLoader",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch TMXLoader",
+            "request": "launch",
+            "mainClass": "games.stendhal.server.core.config.zone.TMXLoader",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch GenerateINI",
+            "request": "launch",
+            "mainClass": "games.stendhal.server.core.engine.GenerateINI",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch BalanceRPGame",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.BalanceRPGame",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch CleanWhitespace",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.CleanWhitespace",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch DuplicateTileFinder",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.DuplicateTileFinder",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch FlipSokoban",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.FlipSokoban",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch GenerateBestiaryAndItems",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.GenerateBestiaryAndItems",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch GenerateDescriptions",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.GenerateDescriptions",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch GenerateMonsterUsage",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.GenerateMonsterUsage",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch MapRenderer",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.MapRenderer",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch MapUpdater",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.MapUpdater",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch TilesetConverter",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.TilesetConverter",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch CharasConverter",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.charas.CharasConverter",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch ContributorAvatarRenamer",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.contributors.ContributorAvatarRenamer",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch ContributorsGeneration",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.contributors.ContributorsGeneration",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch SourceForgeContributorsGenerator",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.contributors.SourceForgeContributorsGenerator",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch CopyTable",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.copytable.CopyTable",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch ReadTable",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.copytable.ReadTable",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch LoginLogoutConsistencyCheck",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.loganalyser.gameevents.LoginLogoutConsistencyCheck",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Analyser",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.loganalyser.itemlog.consistency.Analyser",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Analyser(1)",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.loganalyser.itemlog.contraband.Analyser",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch LagAnalyser",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.loganalyser.laganalyser.LagAnalyser",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch ExtractGameArea",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.map.ExtractGameArea",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch ImageSplit",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.map.ImageSplit",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestEnvDlg",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.npcparser.TestEnvDlg",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch WordListUpdate",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.npcparser.WordListUpdate",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch UpdatePlayerEntities",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.playerUpdate.UpdatePlayerEntities",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch RPClassDumper",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.rpclassdumper.RPClassDumper",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch RPObjectDumper",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.rpobjectdumper.RPObjectDumper",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch AgeDumper",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.statistics.AgeDumper",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch ItemDumper",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.statistics.ItemDumper",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch ChatTestCreator",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.test.ChatTestCreator",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch UpdatePropUpdater",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.updateprop.UpdatePropUpdater",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch UpdateSigner",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.updateprop.UpdateSigner",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch XmlMergerAndSplitter",
+            "request": "launch",
+            "mainClass": "games.stendhal.tools.xml.XmlMergerAndSplitter",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch GroovyShell",
+            "request": "launch",
+            "mainClass": "groovy.lang.GroovyShell",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch GroovyMain",
+            "request": "launch",
+            "mainClass": "groovy.ui.GroovyMain",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch InteractiveShell",
+            "request": "launch",
+            "mainClass": "groovy.ui.InteractiveShell",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch GroovyScriptEngine",
+            "request": "launch",
+            "mainClass": "groovy.util.GroovyScriptEngine",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch GroovyTestSuite",
+            "request": "launch",
+            "mainClass": "groovy.util.GroovyTestSuite",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Tool",
+            "request": "launch",
+            "mainClass": "groovyjarjarantlr.Tool",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Tool(1)",
+            "request": "launch",
+            "mainClass": "groovyjarjarantlr.build.Tool",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch ASTFrame",
+            "request": "launch",
+            "mainClass": "groovyjarjarantlr.debug.misc.ASTFrame",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Tool(2)",
+            "request": "launch",
+            "mainClass": "groovyjarjarantlr.preprocessor.Tool",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch AwtTest",
+            "request": "launch",
+            "mainClass": "jcurses.tests.AwtTest",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Test",
+            "request": "launch",
+            "mainClass": "jcurses.tests.Test",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch JarDiff",
+            "request": "launch",
+            "mainClass": "jnlp.sample.jardiff.JarDiff",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Version",
+            "request": "launch",
+            "mainClass": "junit.runner.Version",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestRunner",
+            "request": "launch",
+            "mainClass": "junit.textui.TestRunner",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch lua",
+            "request": "launch",
+            "mainClass": "lua",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch luac",
+            "request": "launch",
+            "mainClass": "luac",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch luajc",
+            "request": "launch",
+            "mainClass": "luajc",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Sha512Crypt",
+            "request": "launch",
+            "mainClass": "marauroa.common.crypto.Sha512Crypt",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch marauroad",
+            "request": "launch",
+            "mainClass": "marauroa.server.marauroad",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch WebSocketServer",
+            "request": "launch",
+            "mainClass": "marauroa.server.net.web.WebSocketServer",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch GenerateKeys",
+            "request": "launch",
+            "mainClass": "marauroa.tools.GenerateKeys",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch ProtocolAnalyser",
+            "request": "launch",
+            "mainClass": "marauroa.tools.protocolanalyser.ProtocolAnalyser",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch PropertyPrinter",
+            "request": "launch",
+            "mainClass": "org.apache.log4j.config.PropertyPrinter",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Roller",
+            "request": "launch",
+            "mainClass": "org.apache.log4j.varia.Roller",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Diagnostics",
+            "request": "launch",
+            "mainClass": "org.apache.tools.ant.Diagnostics",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "org.apache.tools.ant.Main",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch KeySubst",
+            "request": "launch",
+            "mainClass": "org.apache.tools.ant.taskdefs.KeySubst",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Groovyc",
+            "request": "launch",
+            "mainClass": "org.codehaus.groovy.ant.Groovyc",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch LexerFrame",
+            "request": "launch",
+            "mainClass": "org.codehaus.groovy.antlr.LexerFrame",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main(1)",
+            "request": "launch",
+            "mainClass": "org.codehaus.groovy.antlr.Main",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch FileSystemCompiler",
+            "request": "launch",
+            "mainClass": "org.codehaus.groovy.tools.FileSystemCompiler",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Grok",
+            "request": "launch",
+            "mainClass": "org.codehaus.groovy.tools.Grok",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch GroovyStarter",
+            "request": "launch",
+            "mainClass": "org.codehaus.groovy.tools.GroovyStarter",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Wiki2Markup",
+            "request": "launch",
+            "mainClass": "org.codehaus.groovy.wiki.Wiki2Markup",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Wiki2TestCase",
+            "request": "launch",
+            "mainClass": "org.codehaus.groovy.wiki.Wiki2TestCase",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Server",
+            "request": "launch",
+            "mainClass": "org.eclipse.jetty.server.Server",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Password",
+            "request": "launch",
+            "mainClass": "org.eclipse.jetty.util.security.Password",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch UnixCrypt",
+            "request": "launch",
+            "mainClass": "org.eclipse.jetty.util.security.UnixCrypt",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch XmlConfiguration",
+            "request": "launch",
+            "mainClass": "org.eclipse.jetty.xml.XmlConfiguration",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Backup",
+            "request": "launch",
+            "mainClass": "org.h2.tools.Backup",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch ChangeFileEncryption",
+            "request": "launch",
+            "mainClass": "org.h2.tools.ChangeFileEncryption",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Console",
+            "request": "launch",
+            "mainClass": "org.h2.tools.Console",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch ConvertTraceFile",
+            "request": "launch",
+            "mainClass": "org.h2.tools.ConvertTraceFile",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch CreateCluster",
+            "request": "launch",
+            "mainClass": "org.h2.tools.CreateCluster",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch DeleteDbFiles",
+            "request": "launch",
+            "mainClass": "org.h2.tools.DeleteDbFiles",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Recover",
+            "request": "launch",
+            "mainClass": "org.h2.tools.Recover",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Restore",
+            "request": "launch",
+            "mainClass": "org.h2.tools.Restore",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch RunScript",
+            "request": "launch",
+            "mainClass": "org.h2.tools.RunScript",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Script",
+            "request": "launch",
+            "mainClass": "org.h2.tools.Script",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Server(1)",
+            "request": "launch",
+            "mainClass": "org.h2.tools.Server",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Shell",
+            "request": "launch",
+            "mainClass": "org.h2.tools.Shell",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch AquaLayoutStyle",
+            "request": "launch",
+            "mainClass": "org.jdesktop.layout.AquaLayoutStyle",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch JUnitCore",
+            "request": "launch",
+            "mainClass": "org.junit.runner.JUnitCore",
+            "projectName": "stendhal"
+        },
+        {
+            "type": "java",
+            "name": "Launch LuaParser",
+            "request": "launch",
+            "mainClass": "org.luaj.vm2.parser.LuaParser",
+            "projectName": "stendhal"
+        }
+    ]
+}
