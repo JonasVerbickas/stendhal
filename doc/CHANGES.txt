@@ -2,6 +2,12 @@ Changelog
 ---------
 ---------
 
+1.38
+*new features*
+- implemented "Daily post"
+- implemented "Sleeping bag"
+- implemented "Stealing pet"
+
 1.37
 *fixes*
 - fixed "Omura Sumitada's dialogue" bug #1

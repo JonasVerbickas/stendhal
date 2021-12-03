@@ -203,15 +203,22 @@ Notable contributors:
   · NPCs
 - Jonas Verbickas
   · Bugs fixer
+  · Implemented Stealing pet
 - Tudor Bujdei-Leonte
   · Bugs fixer
+  · Implemented Daily post
 - Dillan Patel
   · Bugs fixer
+  · Implemented Sleeping bag
 - Eduard Sarkisyan
   · Bugs fixer
+  · Implemented Stealing pet
 - Andrej Velichkovski
   · Bugs fixer
+  · Implemented Daily post
 - Muhammad Ahmad
   · Bugs fixer
+  · Implemented Sleeping bag
 - Mihai-Catalin Tenea
   · Bugs fixer
+  · Implemented Daily post
