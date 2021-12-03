@@ -397,6 +397,9 @@ public final class AchievementNotifier {
 			player.addEvent(new ReachedAchievementEvent(achievement));
 			player.addEvent(new SoundEvent(SoundID.ACHIEVEMENT, SoundLayer.USER_INTERFACE));
 			player.notifyWorldAboutChanges();
+			
+			SingletonRepository.allAchievements.add(achievement.getTitle());
+			SingletonRepository.allAchievedBy.add(player.getName());
 		}
 	}
 
