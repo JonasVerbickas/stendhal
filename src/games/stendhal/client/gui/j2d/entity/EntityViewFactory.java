@@ -152,6 +152,7 @@ public class EntityViewFactory {
 		register("house_portal", null, null, HousePortal2DView.class);
 
 		register("item", "box", null, Box2DView.class);
+		register("item", "box", "sleeping", Item2DView.class);
 		register("item", "special", "mithril clasp", Item2DView.class);
 		register("item", null, null, Item2DView.class);
 		register("npc", null, null, NPC2DView.class);

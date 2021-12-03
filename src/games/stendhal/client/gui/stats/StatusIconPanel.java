@@ -71,6 +71,7 @@ class StatusIconPanel extends JComponent {
         statusIDMap.put(StatusID.SHOCK, createStatusIndicator("shock"));
         statusIDMap.put(StatusID.ZOMBIE, createStatusIndicator("zombie"));
         statusIDMap.put(StatusID.HEAVY, createStatusIndicator("heavy"));
+        statusIDMap.put(StatusID.SLEEPING, createStatusIndicator("sleeping")); // added sleeping here
 	}
 
 	/**
