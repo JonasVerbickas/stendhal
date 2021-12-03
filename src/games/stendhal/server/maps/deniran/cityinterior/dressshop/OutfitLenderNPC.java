@@ -41,16 +41,15 @@ import games.stendhal.server.events.ShowOutfitListEvent;
 import games.stendhal.server.events.SoundEvent;
 import games.stendhal.server.util.TimeUtil;
 
-
 public class OutfitLenderNPC implements ZoneConfigurator {
 
 	private static final Logger logger = Logger.getLogger(OutfitLenderNPC.class);
 
 	private SpeakerNPC lender;
+	private SpeakerNPC stealing_pet_npc;
 
 	// how long player can wear outfit (10 hours)
 	private static final int endurance = 10 * MathHelper.MINUTES_IN_ONE_HOUR;
-
 
 	private enum OutfitType {
 		// set hair to -1 to not be drawn
@@ -69,7 +68,6 @@ public class OutfitLenderNPC implements ZoneConfigurator {
 			return outfit_str;
 		}
 	};
-
 
 	private class DeniranOutfit {
 		private final String label;
@@ -99,11 +97,19 @@ public class OutfitLenderNPC implements ZoneConfigurator {
 		}
 	}
 
-
 	@Override
 	public void configureZone(final StendhalRPZone zone, final Map<String, String> attributes) {
 		initNPC(zone);
+		initStealingPetNPC(zone);
 		initShop(zone);
+	}
+
+	private void initStealingPetNPC(final StendhalRPZone zone) {
+		stealing_pet_npc = new SpeakerNPC("StealingPetNPC");
+		stealing_pet_npc.setPosition(5, 2);
+		stealing_pet_npc.setOutfit("body=1,head=1,eyes=8,dress=34,hat=8");
+		stealing_pet_npc.setOutfitColor("skin", SkinColor.LIGHT);
+		zone.add(stealing_pet_npc);
 	}
 
 	private void initNPC(final StendhalRPZone zone) {
@@ -121,14 +127,16 @@ public class OutfitLenderNPC implements ZoneConfigurator {
 		lender.addOffer(helpReply);
 		lender.addJob("I run the Deniran Dress Shop. Let me know if you want to #rent an outfit.");
 
-		final List<Node> nodes = new LinkedList<Node>() {{
-			add(new Node(9, 2));
-			add(new Node(12, 2));
-			add(new Node(12, 15));
-			add(new Node(26, 15));
-			add(new Node(26, 6));
-			add(new Node(21, 6));
-		}};
+		final List<Node> nodes = new LinkedList<Node>() {
+			{
+				add(new Node(9, 2));
+				add(new Node(12, 2));
+				add(new Node(12, 15));
+				add(new Node(26, 15));
+				add(new Node(26, 6));
+				add(new Node(21, 6));
+			}
+		};
 
 		lender.setPathAndPosition(new FixedPath(nodes, true));
 		lender.retracePath();
@@ -138,27 +146,31 @@ public class OutfitLenderNPC implements ZoneConfigurator {
 	}
 
 	private void initShop(final StendhalRPZone zone) {
-		final List<DeniranOutfit> outfitList = new LinkedList<DeniranOutfit>() {{
-			add(new DeniranOutfit("blue bear", OutfitType.BEAR_BLUE, 2500));
-			add(new DeniranOutfit("brown bear", OutfitType.BEAR_BROWN, 2500));
-			add(new DeniranOutfit("superstendhal", OutfitType.SUPERSTENDHAL, 5000));
-		}};
+		final List<DeniranOutfit> outfitList = new LinkedList<DeniranOutfit>() {
+			{
+				add(new DeniranOutfit("blue bear", OutfitType.BEAR_BLUE, 2500));
+				add(new DeniranOutfit("brown bear", OutfitType.BEAR_BROWN, 2500));
+				add(new DeniranOutfit("superstendhal", OutfitType.SUPERSTENDHAL, 5000));
+			}
+		};
 
 		// TODO: add special outfit during Mine Town
 		/*
-		if (Occasion.MINETOWN) {
-
-		}
-		*/
+		 * if (Occasion.MINETOWN) {
+		 * 
+		 * }
+		 */
 
 		final Map<String, Integer> prices = new LinkedHashMap<>();
-		for (final DeniranOutfit outfit: outfitList) {
+		for (final DeniranOutfit outfit : outfitList) {
 			prices.put(outfit.getLabel(), outfit.getPrice());
 		}
 
-		final OutfitChangerBehaviour behaviour = new OutfitChangerBehaviour(prices, endurance, "Your outfit has worn off.", true) {
+		final OutfitChangerBehaviour behaviour = new OutfitChangerBehaviour(prices, endurance,
+				"Your outfit has worn off.", true) {
 			@Override
-			public boolean transactAgreedDeal(final ItemParserResult res, final EventRaiser seller, final Player player) {
+			public boolean transactAgreedDeal(final ItemParserResult res, final EventRaiser seller,
+					final Player player) {
 				final String outfitName = res.getChosenItemName();
 				final int price = getCharge(res, player);
 
@@ -168,7 +180,7 @@ public class OutfitLenderNPC implements ZoneConfigurator {
 				}
 
 				DeniranOutfit selected = null;
-				for (final DeniranOutfit current: outfitList) {
+				for (final DeniranOutfit current : outfitList) {
 					if (current.getLabel().equals(outfitName)) {
 						selected = current;
 						break;
@@ -197,7 +209,7 @@ public class OutfitLenderNPC implements ZoneConfigurator {
 			public boolean wearsOutfitFromHere(final Player player) {
 				final Outfit currentOutfit = player.getOutfit();
 
-				for (final DeniranOutfit possibleOutfit: outfitList) {
+				for (final DeniranOutfit possibleOutfit : outfitList) {
 					if (possibleOutfit.getOutfit().isPartOf(currentOutfit)) {
 						return true;
 					}
@@ -210,11 +222,10 @@ public class OutfitLenderNPC implements ZoneConfigurator {
 		new OutfitChangerAdder() {
 			@Override
 			protected String getReturnPhrase() {
-				return "This outfit can be worn for " +  TimeUtil.timeUntil(60 * endurance)
-				+ ". But you can #return it before it expires if you like.";
+				return "This outfit can be worn for " + TimeUtil.timeUntil(60 * endurance)
+						+ ". But you can #return it before it expires if you like.";
 			};
 		}.addOutfitChanger(lender, behaviour, "rent", false, true);
-
 
 		// a catalog for players to browse
 		final ShopSign catalog = new ShopSign(null, null, null, true) {
@@ -234,7 +245,8 @@ public class OutfitLenderNPC implements ZoneConfigurator {
 						}
 					}
 
-					player.addEvent(new ShowOutfitListEvent("Deniran Dress Shop", lender.getName() + " rents out the following outfits", toSend.toString()));
+					player.addEvent(new ShowOutfitListEvent("Deniran Dress Shop",
+							lender.getName() + " rents out the following outfits", toSend.toString()));
 					player.notifyWorldAboutChanges();
 
 					return true;
